@@ -19,9 +19,14 @@
 					"default": 5,
 					"minimum": 0
 				},
+				"smart-stretch-reminder.minutesOfStretching": {
+					"type": "number",
+					"default": 3,
+					"minimum": 0
+				},
 				"smart-stretch-reminder.stretchMessage": {
 					"type": "string",
-					"default": "Now might be a good time to stretch!"
+					"default": "Now it's time to stretch! Take this seriously!"
 				},
 				"smart-stretch-reminder.minutesBetweenStretching": {
 					"type": "number",

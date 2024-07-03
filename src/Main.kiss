@@ -14,9 +14,13 @@
             (object
                 default 20
                 minimum 0)
+        :Float minutesOfStretching
+            (object
+                default 3
+                minimum 0)
         :String stretchMessage
             (object
-                default "Now might be a good time to stretch!"))
+                default "Now it's time to stretch! Take this seriously!"))
 
     (var &mut :Float lastCheck)
     (var &mut :Float secSpentTyping 0)
@@ -35,7 +39,17 @@
                         (set lastCheck null)
                         (when (>= secSpentTyping (* 60 minutesBetweenStretching))
                             (set secSpentTyping 0)
-                            (infoMessage stretchMessage (object modal true)))
+                            (let [&mut timeElapsed false]
+                                (Timer.delay ->(set timeElapsed true) (* 60000 minutesOfStretching))
+                                (withFunctions 
+                                    [
+                                        (:Void showStretchMessage []
+                                            (awaitLet [_ (infoMessage stretchMessage (object modal true))]
+                                                (unless timeElapsed
+                                                    (showStretchMessage))
+                                                null))
+                                    ]
+                                    (showStretchMessage))))
                     }
                     (* 1000 secondsAfterLastEdit)))
         }))
