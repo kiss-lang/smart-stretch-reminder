@@ -11,6 +11,13 @@
 	"extensionPack": [],
 	"publisher": "",
 	"contributes": {
+		"keybindings": [],
+		"commands": [
+			{
+				"title": "smart-stretch-reminder: Test smart-stretch-reminder stretch message",
+				"command": "smart-stretch-reminder.testShowStretchMessage"
+			}
+		],
 		"configuration": {
 			"title": "smart-stretch-reminder",
 			"properties": {

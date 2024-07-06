@@ -1,4 +1,5 @@
 -lib kiss-vscode-api
+-lib kiss-tools
 -lib kiss
 -cp src
 -js bin/extension.js
