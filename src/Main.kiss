@@ -26,6 +26,7 @@
     (var &mut :Float lastCheck)
     (var &mut :Float secSpentTyping 0)
     (var &mut :Timer timer)
+    (var &mut :Int delaySec)
     (Vscode.workspace.onDidChangeTextDocument ->_
         {
             (when lastCheck
@@ -42,11 +43,19 @@
                             (set secSpentTyping 0)
                             (defAndCall function showStretchMessage
                                 (let [&mut timeElapsed false]
-                                    (Timer.delay ->(set timeElapsed true) (* 60000 minutesOfStretching))
+                                    (set delaySec (* 60 minutesOfStretching))
+                                    (let [secTimer (new Timer 1000)]
+                                        (set secTimer.run ->(-= delaySec 1))
+                                        (Timer.delay 
+                                            ->{
+                                                (secTimer.stop)
+                                                (set timeElapsed true)
+                                            }
+                                            (* 60000 minutesOfStretching)))
                                     (withFunctions 
                                         [
                                             (:Void _showStretchMessage []
-                                                (awaitLet [_ (infoMessage stretchMessage (object modal true))]
+                                                (awaitLet [_ (infoMessage (+ stretchMessage "\n\n$delaySec seconds left") (object modal true))]
                                                     (unless timeElapsed
                                                         (_showStretchMessage))
                                                     null))
