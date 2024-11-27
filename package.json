@@ -8,7 +8,6 @@
 	},
 	"homepage": "",
 	"categories": [],
-	"tags": [],
 	"extensionPack": [],
 	"publisher": "kiss-lang",
 	"contributes": {
@@ -54,5 +53,6 @@
 	"activationEvents": [
 		"onStartupFinished"
 	],
+	"tags": [],
 	"displayName": "Smart Stretch Reminder"
 }
